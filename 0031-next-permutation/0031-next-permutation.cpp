@@ -26,10 +26,7 @@ public:
         
         reverse(nums.begin()+check+1,nums.end());
         
-        for(auto &it:nums)
-        {
-            cout<<it<<" ";
-        }
+     return;
         
         
         
