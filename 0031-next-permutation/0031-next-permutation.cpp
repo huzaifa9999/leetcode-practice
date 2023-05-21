@@ -18,7 +18,8 @@ public:
       if(check>=0)
       {
           int j=n;
-          while(j>=0&&nums[j]<=nums[check])  j--;
+          while(j>=0&&nums[j]<=nums[check])  
+          {j--;}
           
           swap(nums[j],nums[check]);
           
