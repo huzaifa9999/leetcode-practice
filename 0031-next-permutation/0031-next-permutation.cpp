@@ -1,6 +1,8 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
+       
+        
         int check=-1;
     int n= nums.size()-1;
      
@@ -8,7 +10,6 @@ public:
         {
             if(nums[i]>nums[i-1])
             {
-              
                 check=i-1;
                 break;
             }
@@ -17,8 +18,7 @@ public:
       if(check>=0)
       {
           int j=n;
-          while(j>=0&&nums[j]<=nums[check])
-          {  j--;}
+          while(j>=0&&nums[j]<=nums[check])  j--;
           
           swap(nums[j],nums[check]);
           
