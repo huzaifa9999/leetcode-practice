@@ -11,8 +11,7 @@ public:
         {
             if(nums[low]+nums[high]==target)
             {
-                v.push_back(low+1);
-                v.push_back(high+1);
+               return{low+1,high+1};
                 break;
             }
             else if(nums[low]+nums[high]>target)
