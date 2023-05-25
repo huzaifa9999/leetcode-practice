@@ -6,20 +6,17 @@ public:
        
         for(auto &it:nums)
         {
-            prod=prod*it;
-            
+            prod*=it;
             p=max(p,prod);
             if(prod==0)
                 prod=1;
         }
         
         prod=1;
-        reverse(nums.begin(),nums.end());
-        
+        reverse(nums.begin(),nums.end());  
         for(auto &it:nums)
         {
-            prod=prod*it;
-            
+            prod*=it;
             n=max(n,prod);
             if(prod==0)
                 prod=1;
