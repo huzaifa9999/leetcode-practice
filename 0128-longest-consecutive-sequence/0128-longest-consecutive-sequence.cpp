@@ -11,7 +11,9 @@ public:
      int longest=0;  
 for(auto &it:nums)
 {
-    if(mp.count(it-1)==0)
+    if(mp.count(it-1))
+        continue;
+    else
     {
         int length=0;
         while(mp.count(it+length))
