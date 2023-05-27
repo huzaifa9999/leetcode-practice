@@ -2,11 +2,10 @@ class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
         
-        int size= nums.size();
+        int size= nums.size()/3;
         unordered_map <int,int>mp;
         vector<int>v;
         
-        size=size/3;
         
         for(auto &it:nums)
         { mp[it]++;
