@@ -2,7 +2,9 @@ class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
     map<int,int>mp;    
-   for(auto &it:nums)
+   
+        
+        for(auto &it:nums)
    { mp[it]++;
        
    }
