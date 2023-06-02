@@ -19,10 +19,10 @@ public:
             
         }
         
-        vector<int>v;
-        v.push_back(index);
-         v.push_back(count);
+        // vector<int>v;
+        // v.push_back(index);
+        //  v.push_back(count);
         
-        return v;
+        return {index,count};
     }
 };
