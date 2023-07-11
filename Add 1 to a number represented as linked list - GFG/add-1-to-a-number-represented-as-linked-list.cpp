@@ -76,7 +76,7 @@ class Solution
             if(curr->data!=9)
             { 
                 curr->data+=1;
-                // head=reverseList(curr);
+        
                 carry=false;
     
             }
