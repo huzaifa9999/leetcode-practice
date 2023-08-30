@@ -126,24 +126,20 @@ struct Node
     }
 };
  */
-void leftview(Node* root,vector<int>&v,int level)
-{
-    if(root==NULL) return;
-    if(level==v.size())
-   { v.push_back(root->data);
-}
-    
-    leftview(root->left,v,level+1);
-    leftview(root->right,v,level+1);
-}
+
 //Function to return a list containing elements of left view of the binary tree.
+
+void leftview(vector<int>&ans,Node* root, int level)
+{ 
+    if(root==NULL) return ;
+    if(level==ans.size()) ans.push_back(root->data);
+    leftview(ans,root->left,level+1);
+    leftview(ans,root->right,level+1);
+}
 vector<int> leftView(Node *root)
 {
    // Your code here
-   vector<int>v;
-//   int level=0;
-   leftview(root,v,0);
-   return v;
+   vector<int>ans;
+   leftview(ans,root,0);
+  return ans;
 }
-
-
