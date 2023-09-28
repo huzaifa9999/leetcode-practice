@@ -10,6 +10,7 @@ class Solution {
 	// 	st.push(node);
 	// }
 public:
+    
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         int V=numCourses;
       
@@ -19,7 +20,7 @@ public:
         queue<int>q;
         vector<int>ans;
     for(vector<int> edge : prerequisites)
-        adj[edge[0]].push_back(edge[1]);
+        adj[edge[1]].push_back(edge[0]);
         
         for(int i=0;i<V;i++)
     {
