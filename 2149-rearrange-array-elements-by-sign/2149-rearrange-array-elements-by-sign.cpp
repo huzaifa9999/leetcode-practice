@@ -1,23 +1,16 @@
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
-
-        vector<int>positive;
-        vector<int> negative;
-        vector<int>result;
-        for(auto &it: nums)
+     int even=0,odd=1;   
+      vector<int>ans(nums.size());
+        for(auto &it:nums)
         {
-            if(it<0)
-            negative.push_back(it);
+            if(it>0)
+            {ans[even]=it;even+=2;}
             else
-            positive.push_back(it);
+            { ans[odd]=it,odd+=2;}
         }
-
-        for(int i=0;i<positive.size();i++)
-        {
-result.push_back(positive[i]);
-result.push_back(negative[i]);
-        }
-        return result;
+        return ans;
+        
     }
 };
