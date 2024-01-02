@@ -13,17 +13,30 @@ public:
         int n=nums.size();
         vector<int>dp(n,-1);
         // int ans=func(nums,n-1,dp);
-        dp[0]=nums[0];
-        for(int i=1;i<n;i++)
-        { 
-            int pick=nums[i];
-            if(i>1) pick+=dp[i-2];
-        int notpick=dp[i-1];
+//         dp[0]=nums[0];
+//         for(int i=1;i<n;i++)
+//         { 
+//             int pick=nums[i];
+//             if(i>1) pick+=dp[i-2];
+//         int notpick=dp[i-1];
             
-            dp[i]=max(pick,notpick);
-        }
-        return dp[n-1];
+//             dp[i]=max(pick,notpick);
+//         }
+//         return dp[n-1];
+        int prev=nums[0],prev2;
         
+        for(int i=1;i<n;i++)
+        {
+            int pick=nums[i];
+            if(i>1) pick+=prev2;
+            int notpick=prev;
+             int curi= max(pick,notpick);
+            
+            prev2=prev;
+            prev=curi;
+            
+        }
+        return prev;
         
     }
 };
