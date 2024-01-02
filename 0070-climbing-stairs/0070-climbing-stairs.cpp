@@ -22,15 +22,26 @@ public:
         
         
         //tabulation
-         vector<int>dp(n+1,-1); //tabultation (base case is defined)
-            dp[0]=1;
-        dp[1]=1;
+//          vector<int>dp(n+1,-1); //tabultation (base case is defined)
+//             dp[0]=1;
+//         dp[1]=1;
+//         for(int i=2;i<=n;i++)
+//         {
+//             dp[i]= dp[i-1]+dp[i-2];
+//         }
+        
+//         return dp[n];
+        
+        
+        //space optimization
+        
+        int prev=1,prev2=1;
         for(int i=2;i<=n;i++)
         {
-            dp[i]= dp[i-1]+dp[i-2];
+            int curi=prev+prev2;
+            prev2=prev;
+            prev=curi;
         }
-        
-        return dp[n];
-       
+       return prev;
     }
 };
