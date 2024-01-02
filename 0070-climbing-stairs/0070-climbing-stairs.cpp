@@ -15,9 +15,22 @@ public:
     
     int climbStairs(int n) {
         
-        vector<int>dp(n+1,-1);//memoization
+        // vector<int>dp(n+1,-1);//memoization        
+        // int ans=func(n,dp); memorizatio
+         // return ans; memoirzation
         
-        int ans=func(n,dp);
-        return ans;
+        
+        
+        //tabulation
+         vector<int>dp(n+1,-1); //tabultation (base case is defined)
+            dp[0]=1;
+        dp[1]=1;
+        for(int i=2;i<=n;i++)
+        {
+            dp[i]= dp[i-1]+dp[i-2];
+        }
+        
+        return dp[n];
+       
     }
 };
