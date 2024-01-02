@@ -5,10 +5,10 @@ public:
      {
          if(n<=1) return 1;
          if(dp[n]!=-1) return dp[n];
-//          int left=  func(n-1);
-//          int right=func(n-2);
+         int left=  func(n-1,dp);
+         int right=func(n-2,dp);
          
-         return dp[n]=func(n-1,dp)+func(n-2,dp);
+         return dp[n]=left+right;
     
          
      }
