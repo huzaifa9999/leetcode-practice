@@ -1,10 +1,10 @@
 class Solution {
 public:    
         int func(vector<int>&nums,int n)
-    { vector<int>dp(n+1,-1);
+    { vector<int>dp(n,-1);
        dp[0]=nums[0]; 
         // if(dp[n]!=-1) return dp[n];
-        for(int i=1;i<=n;i++)
+        for(int i=1;i<n;i++)
         {
         int pick= nums[i];
             
@@ -12,7 +12,7 @@ public:
         int notpick=dp[i-1];
         dp[i]=max(pick,notpick);
         }
-        return dp[n];
+        return dp[n-1];
     }
     
     int rob(vector<int>& nums) {
@@ -25,8 +25,8 @@ public:
             if(i!=nums.size()-1) second.push_back(nums[i]);
         }
         
-        int ans1=func(first,first.size()-1);
-        int ans2=func(second,second.size()-1);
+        int ans1=func(first,first.size());
+        int ans2=func(second,second.size());
         return max(ans1,ans2);
         
         
