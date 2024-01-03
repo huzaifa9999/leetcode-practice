@@ -1,23 +1,22 @@
 class Solution {
-public:
-    
-    int func(vector<int>&nums,int n, vector<int>&dp)
-    {
-        if(n==0) return nums[0];
-        if(n<0) return 0;
-        
-        if(dp[n]!=-1) return dp[n];
-        
-        int pick= nums[n]+func(nums,n-2,dp);
-        int notpick=func(nums,n-1,dp);
-        
-        return dp[n]=max(pick,notpick);
+public:    
+        int func(vector<int>&nums,int n)
+    { vector<int>dp(n+1,-1);
+       dp[0]=nums[0]; 
+        // if(dp[n]!=-1) return dp[n];
+        for(int i=1;i<=n;i++)
+        {
+        int pick= nums[i];
+            
+            if(i>1) pick+=dp[i-2];
+        int notpick=dp[i-1];
+        dp[i]=max(pick,notpick);
+        }
+        return dp[n];
     }
     
     int rob(vector<int>& nums) {
         int n=nums.size();
-        vector<int>dp(n,-1);
-         vector<int>dp1(n,-1);
         vector<int>first,second;
         if(n==1) return nums[0];
         for(int i=0;i<nums.size();i++)
@@ -26,8 +25,45 @@ public:
             if(i!=nums.size()-1) second.push_back(nums[i]);
         }
         
-        return max(func(first,first.size()-1,dp),func(second,second.size()-1,dp1));
+        int ans1=func(first,first.size()-1);
+        int ans2=func(second,second.size()-1);
+        return max(ans1,ans2);
         
         
     }
+    
+    
+    
+    //memoization
+    
+    
+    //     int func(vector<int>&nums,int n, vector<int>&dp)
+//     {
+//         if(n==0) return nums[0];
+//         if(n<0) return 0;
+        
+//         if(dp[n]!=-1) return dp[n];
+        
+//         int pick= nums[n]+func(nums,n-2,dp);
+//         int notpick=func(nums,n-1,dp);
+        
+//         return dp[n]=max(pick,notpick);
+//     }
+//     int rob(vector<int>& nums) {
+//         int n=nums.size();
+//         vector<int>dp(n,-1);
+//          vector<int>dp1(n,-1);
+//         vector<int>first,second;
+//         if(n==1) return nums[0];
+//         for(int i=0;i<nums.size();i++)
+//         {
+//             if(i!=0) first.push_back(nums[i]);
+//             if(i!=nums.size()-1) second.push_back(nums[i]);
+//         }
+        
+//         return max(func(first,first.size()-1,dp),func(second,second.size()-1,dp1));
+        
+        
+//     }
+    
 };
