@@ -16,8 +16,21 @@ public:
         
         vector<vector<int>>dp(m,vector<int>(n,-1));
         
-        
-        int ans= f(m-1,n-1,grid,dp);
-    return ans;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(i==0&&j==0) 
+                {dp[i][j]= grid[0][0];continue;}
+                int left=0,up=0;
+              up=grid[i][j] ; if(i>0) up+=dp[i-1][j]; else up+=1e9;
+            left=grid[i][j]  ;  if(j>0) left+=dp[i][j-1]; else left+=1e9;
+                
+                
+                dp[i][j]=min(left,up);
+            }
+        }
+        // int ans= f(m-1,n-1,grid,dp);
+    return dp[m-1][n-1];
     }
 };
