@@ -9,45 +9,44 @@
  * };
  */
 class Solution {
-public:
-    bool isPalindrome(ListNode* head) {
+public: 
+    ListNode *reverse(ListNode* head)
+{
+    ListNode*prev=NULL;
+        ListNode*curr=head;
+        ListNode* next;
         
-        ListNode* fast=head;
-        ListNode* slow=head;
-         ListNode* temp;
-        while(fast->next!=NULL&&fast->next->next!=NULL)
+        while(curr)
         {
-            fast=fast->next->next;
+         next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+        
+        
+}
+    bool isPalindrome(ListNode* head) {
+        ListNode* curr=head;
+        ListNode* rev=head;
+           ListNode* fast=head;   ListNode* slow=head;
+while(fast-> next&&fast->next->next)
+{
+    fast=fast->next->next;
+    slow=slow->next;
+}
+        slow->next=reverse(slow->next);
+       slow=slow->next;
+        while(slow!=NULL)
+        {
+            if(curr->val!=slow->val) return false;
+            curr=curr->next;
             slow=slow->next;
         }
         
-        ListNode* newhead=slow;
-        slow=slow->next;
-        newhead->next=NULL;
-
-        while(slow)
-        {
-            temp =slow->next;
-            slow->next=newhead;
-            newhead=slow;
-            slow=temp;
-        }
-        
-        fast=head;
-        slow=newhead;
-        
-        while(slow&&fast)
-        {
-            if(fast->val!=slow->val)
-                return false;
-            else
-            {
-                fast=fast->next;
-                slow=slow->next;
-            }
-        }
+       
         return true;
-        
         
     }
 };
