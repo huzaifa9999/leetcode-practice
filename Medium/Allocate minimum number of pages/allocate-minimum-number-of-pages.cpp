@@ -11,46 +11,42 @@ using namespace std;
 class Solution 
 {
     public:
-    
-    bool check(int a[], int n, int m,int mid)
-{ int boys=1;int sum=0;
-  for(int i=0;i<n;i++)
-{   
-    
-    if(a[i]>mid) return false;
-else
-{
-
-if (sum+a[i] > mid) {
-  sum = a[i];
-  boys++;
-}
-else sum+=a[i];
-}
-}
-if(boys>m) return false;
- 
-return true;
-
-}
-    
+    int check(int mid,int a[],int size)
+    {
+        
+        int stu=1,count=0;
+        for(int i=0;i<size;i++)
+        {
+            if(a[i]>mid) return 1e9;
+            if(count+a[i]<=mid)
+            {
+                count+=a[i];
+            }
+            else
+            {
+                stu++;
+                count=a[i];
+            }
+        }
+    return stu;
+        
+    }
     //Function to find minimum number of pages.
-    int findPages(int a[], int n, int m) 
+    int findPages(int a[], int size, int students) 
     {
         //code here
+        if(students>size) return -1;
+        int low=1,high=1e9;
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            int stu=check(mid,a,size);
+            if(stu>students) low=mid+1;
+            else
+            high=mid-1;
+        }
         
-           int low=1,high=INT_MAX;
-
-if(m>n) return -1;
-   while(low<=high)
-   {
-       int mid= low+(high-low)/2;
-       if(check(a,n,m,mid)==true)  high=mid-1;
-       else low=mid+1; 
-
-   } 
-
-   return low;
+        return low;
     }
 };
 
