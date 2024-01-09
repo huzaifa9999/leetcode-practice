@@ -30,6 +30,7 @@ bool check(int n, int k, vector<int> &stalls,int mid)
         // Write your code here
         sort(stalls.begin(),stalls.end());
        int low=1,high=1e9;
+       int lowss=9820;
        while(low<=high)
        {
            int mid=low+(high-low)/2;
