@@ -15,18 +15,18 @@ public:
     void f(TreeNode* root,vector<int>&ans)
     {
         if(root==NULL) return;
-         ans.push_back(root->val);
+        
+        f(root->left,ans);
         f(root->right,ans);
        
-        f(root->left,ans);
-       
+        ans.push_back(root->val);
         
     }
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int>ans;
         if(root==NULL) return ans;
      f(root,ans);
-        reverse(ans.begin(),ans.end());
+        // reverse(ans.begin(),ans.end());
         return ans;
     }
 };
