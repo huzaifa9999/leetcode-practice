@@ -105,59 +105,67 @@ struct Node
 
 class Solution {
 public:
-bool isLeaf(Node* root)
+
+bool isleaf(Node *root)
 {
-    if(!root->left&&!root->right) return true;
-    
+    if(root->left==NULL&&root->right==NULL) return true;
     return false;
-}
-void leftb(Node* root, vector<int>&ans)
-{
-    while(root!=NULL)
-    {
-        if(!isLeaf(root)) ans.push_back(root->data);
-        if(root->left) root=root->left;
-        else
-        root=root->right;
-    }
-}
-
-void rightb(Node* root,vector<int>& ans)
-{
-    vector<int> temp;
-        while(root!=NULL)
-    {
-        if(!isLeaf(root)) temp.push_back(root->data);
-        if(root->right) root=root->right;
-        else
-        root=root->left;
-    }
-    
-    for(int i=temp.size()-1;i>=0;i--)
-    {
-        ans.push_back(temp[i]);
-    }
     
 }
 
-void leafnode(Node* root, vector<int>&ans)
+
+void leftb(Node* root,vector<int>&ans)
+{
+    Node *curr=root;
+    curr=curr->left;
+    while(curr)
+    {
+        if(!isleaf(curr)) ans.push_back(curr->data);
+        if(curr->left) curr=curr->left;
+        else  curr=curr->right;
+    }
+}
+void rightb(Node* root,vector<int>&ans)
+{
+    Node *curr=root;
+    curr=curr->right;
+    vector<int>temp;
+    while(curr)
+    {
+        if(!isleaf(curr)) temp.push_back(curr->data);
+        if(curr->right) curr=curr->right;
+        else  curr=curr->left;
+    }
+    reverse(temp.begin(),temp.end());
+    for(auto &it:temp)
+    {
+        ans.push_back(it);
+    }
+}
+void leaf (Node* root,vector<int>&ans)
 { 
-    if(isLeaf(root)){
-         ans.push_back(root->data);
-         return;
-    }
-   if(root->left) leafnode(root->left,ans);
-  if(root->right)  leafnode(root->right,ans);
+    if(isleaf(root)) 
+    {ans.push_back(root->data);return ;}
+    
+    if(root->left) leaf(root->left,ans);
+    if(root->right) leaf(root->right,ans);
+    
 }
+
+
     vector <int> boundary(Node *root)
     {
         //Your code here
         vector<int>ans;
-        if(!root) return ans;
-       if(!isLeaf(root)) ans.push_back(root->data);
-        leftb(root->left,ans);
-        leafnode(root,ans);
-        rightb(root->right,ans);
+        if(root==NULL) return ans;
+        // if(isleaf(root)) return {root->data};
+        if(!isleaf(root)) 
+        ans.push_back(root->data);
+        leftb( root,ans);
+        leaf(root,ans);
+        rightb(root,ans);
+            
+        
         
         return ans;
     }
