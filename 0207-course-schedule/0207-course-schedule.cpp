@@ -1,54 +1,46 @@
 class Solution {
-    
-	// private:
-	// void dfs(int node, vector<int>vis, stack<int> &st,
-	//         vector<vector<int>>prerequisites) {
-	// 	vis[node] = 1;
-	// 	for (auto it : prerequisites[node]) {
-	// 		if (!vis[it]) dfs(it, vis, st, prerequisites);
-	// 	}
-	// 	st.push(node);
-	// }
 public:
     
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        int V=numCourses;
-      
-        vector<int>indegree(numCourses,0);
-        
-           vector<vector<int>> adj(V);
-        queue<int>q;
-        vector<int>ans;
-    for(vector<int> edge : prerequisites)
-        adj[edge[1]].push_back(edge[0]);
-        
-        for(int i=0;i<V;i++)
+    bool dfs(int root,vector<int>adj[],vector<int>&vis,vector<int>&path)
     {
-        for(auto it: adj[i])
-        {
-            indegree[it]++;
-        }
-    }
+        vis[root]=1;
+        path[root]=1;
         
-          for(int i=0;i<V;i++)
-    {
-        if(indegree[i]==0) q.push(i);
-    }
-        while(!q.empty())
+        for(auto it:adj[root])
         {
-            int node = q.front();
-            q.pop();
-            ans.push_back(node);
-            
-            for(auto it: adj[node])
+            if(!vis[it])
             {
-                indegree[it]--;
-                if(indegree[it]==0) q.push(it);
+               if( dfs(it,adj,vis,path)==true) return true;
+            }
+            else if(path[it]==1) return true;
+        }
+        path[root]=0;
+        
+        return false;
+        
+    }
+    
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        
+        int v=numCourses;
+        vector<int>adj[v];
+        
+        for(auto &it:prerequisites)
+        {
+        adj[it[1]].push_back(it[0]);
+        }
+        
+        
+        vector<int>vis(v,0);
+        vector<int>path(v,0);
+        for(int i=0;i<v;i++)
+        {
+            if(!vis[i])
+            {
+                if(dfs(i,adj,vis,path)==true) return false;
             }
         }
+                   return true;
         
-        if(ans.size()!=V) return false;
-        else return true;
-    
     }
 };
