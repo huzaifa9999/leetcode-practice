@@ -25,10 +25,23 @@ public:
                 
             }
         }
+        return true;       
+    }
+    
+    bool dfs(vector<vector<int>>& graph,int root,vector<int>&colour,int col)
+    {
+        colour[root]=col;
+        
+        for(auto it:graph[root])
+        {
+            if(colour[it]==-1)
+            {
+                if(dfs(graph,it,colour,!col)==false) return false;
+            }
+            else if(colour[it]==colour[root]) return false;
+        }
+        
         return true;
-        
-        
-        
     }
     bool isBipartite(vector<vector<int>>& graph) {
         
@@ -41,7 +54,7 @@ public:
         {
             if(colour[i]==-1)
             {
-                if(bfs(graph,i,colour)==false) return false;
+                if(dfs(graph,i,colour,0)==false) return false;
             }
         }
         return true;
