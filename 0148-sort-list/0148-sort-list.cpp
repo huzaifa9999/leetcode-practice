@@ -10,59 +10,27 @@
  */
 class Solution {
 public:
-
-ListNode* Mid(ListNode* head)
-{
-    ListNode* slow=head;
-    ListNode* fast=head;
-    while(fast->next!=NULL&&fast->next->next!=NULL)
-    {
-        fast=fast->next->next;
-        slow=slow->next;
-    }
-    return slow;
-
-}
-    
-    ListNode* mergedList(ListNode*left,ListNode* right)
-    {
-        if(left==NULL||right==NULL)
-        {
-            return (left==NULL)?right:left;
-        }
-        ListNode *ans=new ListNode(0);
-        ListNode* curr=ans;
+    ListNode* sortList(ListNode* head) {
+     
+        vector<int>arr;
+        ListNode* curr= head;
         
-        while(left!=NULL && right!=NULL)
+        while(curr!=NULL)
         {
-            if(left->val<=right->val)
-            {
-                curr->next=left;
-                left=left->next;
-            }
-            else if(right->val<left->val)
-            {
-                curr->next=right;
-                right=right->next;
-            }
+            arr.push_back(curr->val);
             curr=curr->next;
         }
         
-    if(left!=NULL || right!=NULL)
-    {
-        curr->next=(left==NULL)?right:left;
-    }
-        return ans->next;
-    }
+        sort(arr.begin(),arr.end());
+        ListNode*ans=head;
+        ListNode* head2=head;
         
-    ListNode* sortList(ListNode* head) {
-        if(head==NULL||head->next==NULL)return head;
-        ListNode* mid=Mid(head);
-  ListNode* newhead=mid->next;
-  mid->next=NULL;
-        ListNode* left=sortList(head);
-        ListNode* right=sortList(newhead);
-
-        return mergedList(left,right);
+     int i=0;
+        while(head2!=NULL)
+        {
+            head2->val=arr[i++];
+            head2=head2->next;
+        }
+        return ans;
     }
 };
