@@ -15,13 +15,7 @@ long long int calculateTotalHours(vector<int> &piles, long long int speed) {
     long long int n = piles.size();
     //find total hours:
     for (int i = 0; i < n; i++) {
-         long long val=piles[i];
-        
-        if(val<speed) totalH+=1;
-        
-        else if(val%speed==0) totalH+=(val/speed);   
-        
-        else totalH+=(val/speed)+1;
+         totalH += ceil((double)(piles[i]) / (double)(speed));
 
     }
     return totalH;
