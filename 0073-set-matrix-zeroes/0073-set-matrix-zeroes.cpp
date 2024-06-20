@@ -1,33 +1,26 @@
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
-     
-        int m= matrix.size();
-        int n=matrix[0].size();
-        
-        vector<pair<int,int>> cord;
-        
-        for(int i=0;i<m;i++)
+        set<pair<int,int>>s;
+        for(int i=0;i<matrix.size();i++)
         {
-            for(int j=0;j<n;j++)
+            for(int j=0;j<matrix[0].size();j++)
             {
-                if(matrix[i][j]==0)
-                    cord.push_back({i,j});
+                if(matrix[i][j]==0) s.insert({i,j});
             }
         }
-        for(auto it:cord)
-        { int x=it.first;
-         int y=it.second;
-         
-         
-            for(int i=0;i<m;i++)
+        for(auto it:s)
+        {
+            int row=it.first;
+            int col=it.second;
+            for(int i=0;i<matrix.size();i++)
             {
-                matrix[i][y]=0;
+                matrix[i][col]=0;
             }
-          for(int i=0;i<n;i++)
-            {
-                matrix[x][i]=0;
-            }
+for(int j=0;j<matrix[0].size();j++)
+{
+    matrix[row][j]=0;
+}
         }
         
     }
