@@ -1,34 +1,40 @@
 class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
+ 
         vector<vector<int>>ans;
         sort(nums.begin(),nums.end());
         for(int i=0;i<nums.size();i++)
         {
+            long long int first=nums[i];
             if(i>0&&nums[i]==nums[i-1]) continue;
-            
             for(int j=i+1;j<nums.size();j++)
             {
-                if(j>i+1&&nums[j]==nums[j-1]) continue;
-                
-                int l=j+1,h=nums.size()-1;
-                while(l<h)
+                 if(j>i+1&&nums[j]==nums[j-1])continue;
+                long long int second=nums[j];
+                int low=j+1;
+                int high=nums.size()-1;
+                while(low<high)
                 {
-                if(((long long)nums[i]+(long long)nums[j]+(long long)nums[l]+(long long)nums[h])==(long long)(target))
-                {ans.push_back({nums[i],nums[j],nums[l],nums[h]});
-                    l++;
-                    h--;
-                    
-                    while(l<h&&nums[h]==nums[h+1]) h--;
-                    while(l<h&&nums[l]==nums[l-1]) l++;}
-                    
-                    else if(((long long)nums[i]+(long long)nums[j]+(long long)nums[l]+(long long)nums[h])>(long long )(target) ) h--;
+                    long long int sum=first+second+nums[low]+nums[high];
+                    if(target==sum) 
+                    {
+                        ans.push_back({nums[i],nums[j],nums[low],nums[high]});
+                        low++;
+                        high--;
+                        while(low<high&&nums[low]==nums[low-1]) low++;
+                        while(low<high&&nums[high]==nums[high+1]) high--;
+                    }
+                    else if(target>sum)
+                    {
+                        low++;
+                    }
                     else
-                        l++;
-            
-                    
-                }
-            }
+                    {
+                        high--;
+                    }          
+                }   
+            }       
         }
         return ans;
     }
