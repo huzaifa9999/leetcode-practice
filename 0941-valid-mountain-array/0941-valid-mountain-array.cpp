@@ -2,26 +2,24 @@ class Solution {
 public:
     bool validMountainArray(vector<int>& arr) {
          int n=arr.size();
-
-        //if only single element is given
-        //i.e., only decreasing condition is there...
         if(n==1)
         return false;
 
 //now checking for rest of the cases which could return false
-        int increasing=1;
+        int flag=1;
         for(int i=1;i<n;i++){
             //if increasing change to 0 i.e, if decreasing array is there or not
-            if(arr[i]<arr[i-1]){         //checking condition
+            if(arr[i]<arr[i-1])
+            {         //checking condition
                 if(i==1){                //always decr. case
                     return false;
                 }
 
-                increasing=0;
+                flag=0;
             }
 
 //this checks if incr. condn. gets violated (since there is equal to sign)
-            if(increasing){
+            if(flag){
                 if(arr[i]<=arr[i-1]){
                     return false;
                 }
@@ -35,7 +33,7 @@ public:
         }
 
         //always increasing condition so returns false as it is not a valid mountain
-        if(increasing==1)
+        if(flag==1)
         return false;
 
 /*otherwise return true i.e, after checking all the possible conditions that can make
